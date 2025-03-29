@@ -1,0 +1,151 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Hero Section */
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #e0e1dd;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated Background Effect */
+.hero::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 60%);
+    top: -50%;
+    left: -50%;
+    animation: glowPulse 15s infinite alternate;
+}
+
+@keyframes glowPulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.2); opacity: 0.2; }
+}
+
+/* Heading */
+.hero h1 {
+    font-size: 50px;
+    font-weight: 600;
+    margin-top: -60px;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(255, 46, 99, 0.7);
+    z-index: 1;
+    user-select: none; /* Prevents text selection */
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE/Edge */
+}
+
+.hero h1 span {
+    color: #ff2e63;
+    background: linear-gradient(90deg, #ff2e63, #ff9f1c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Textarea */
+textarea {
+    width: 650px;
+    height: 280px;
+    background: rgba(27, 38, 59, 0.9);
+    color: #e0e1dd;
+    font-size: 16px;
+    border: 2px solid #778da9;
+    outline: none;
+    padding: 25px;
+    border-radius: 15px;
+    resize: none;
+    margin-bottom: 40px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    z-index: 1; /* Ensures it stays above background effects */
+}
+
+textarea:focus {
+    border-color: #ff2e63;
+    box-shadow: 0 0 20px rgba(255, 46, 99, 0.5);
+}
+
+textarea::placeholder {
+    font-size: 16px;
+    color: #778da9;
+}
+
+/* Row Container */
+.row {
+    width: 650px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    z-index: 1;
+}
+
+/* Button */
+button {
+    background: linear-gradient(45deg, #ff2e63, #ff9f1c);
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px 40px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 46, 99, 0.4);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 46, 99, 0.6);
+}
+
+/* Select Dropdown */
+select {
+    flex: 1;
+    color: #e0e1dd;
+    background: rgba(27, 38, 59, 0.9);
+    height: 55px;
+    padding: 0 25px;
+    outline: none;
+    border: 2px solid #778da9;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+select:hover, select:focus {
+    border-color: #ff2e63;
+}
+
+/* Scrollbar Styling (Optional) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1b263b;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ff2e63;
+    border-radius: 10px;
+}
