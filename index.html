@@ -9,12 +9,38 @@
 </head>
 <body>
     <div class="hero">
-        <h1>Text to Speech <span>Converter</span></h1>
-        <textarea placeholder="Write anything here..."></textarea>
-        <p id="charCount">Characters: 0 | Words: 0</p>
-        <div class="row">
-            <select></select>
-            <button>Listen</button>
+        <div class="hero-content">
+            <h1>Text to Speech <span>Converter</span></h1>
+            
+            <!-- File upload section -->
+            <div class="file-upload">
+                <input type="file" id="fileInput" accept=".txt,.docx">
+                <button id="uploadBtn" class="action-button upload-button">Upload File</button>
+                <span id="fileName"></span>
+            </div>
+            
+            <textarea placeholder="Write anything here..."></textarea>
+            <p id="charCount">Characters: 0 | Words: 0</p>
+            
+            <!-- Controls row -->
+            <div class="row">
+                <select id="voiceSelect"></select>
+                <select id="speedControl">
+                    <option value="0.5">0.5x</option>
+                    <option value="0.75">0.75x</option>
+                    <option value="1" selected>1x</option>
+                    <option value="1.25">1.25x</option>
+                    <option value="1.5">1.5x</option>
+                    <option value="1.75">1.75x</option>
+                    <option value="2">2x</option>
+                </select>
+            </div>
+            
+            <!-- Action buttons -->
+            <div class="action-buttons">
+                <button id="clearBtn" class="action-button clear-button">Clear Text</button>
+                <button id="listenBtn" class="action-button listen-button">Listen</button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
