@@ -41,7 +41,6 @@ function populateVoices() {
         voiceSelect.value = defaultVoiceIndex;
     } else {
         // Silent fallback for no voices
-        //console.warn('No voices detected, using system default');
         voices = [{ name: 'System Default Voice', lang: 'en-US' }]; // Mock voice
         voiceSelect.options[0] = new Option('System Default Voice (Limited)', 0);
         voiceSelect.value = 0;
@@ -199,7 +198,7 @@ listenBtn.addEventListener("click", () => {
             window.speechSynthesis.pause();
             listenBtn.textContent = "Resume";
         } else if (window.speechSynthesis.paused) {
-            window.speechSynthesis.resume();
+                window.speechSynthesis.resume();
             listenBtn.textContent = "Pause";
         }
     }
