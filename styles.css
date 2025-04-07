@@ -24,33 +24,31 @@
 /* Fixed Background Layer */
 .hero::before {
     content: '';
-    position: fixed; /* Changed from absolute to fixed */
+    position: fixed;
     width: 100vw;
     height: 100vh;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 60%);
     top: 0;
     left: 0;
     animation: glowPulse 15s infinite alternate;
-    z-index: 0; /* Ensure it stays behind content */
-    pointer-events: none; /* Allows clicks to pass through */
+    z-index: 0;
+    pointer-events: none;
 }
 
-/* Content Container - New */
+/* Content Container - Updated for Responsiveness */
 .hero-content {
     position: relative;
-    z-index: 10; /* Above the background */
+    z-index: 10;
     width: 100%;
-    max-width: 650px;
+    max-width: 90vw; /* Changed from 650px to 90% of viewport width */
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Update all content elements to be inside .hero-content */
-/* Move all your existing content styles inside .hero-content */
 /* Heading */
 .hero h1 {
-    font-size: 50px;
+    font-size: clamp(30px, 5vw, 50px); /* Scales between 30px and 50px based on viewport */
     font-weight: 600;
     margin-top: -60px;
     margin-bottom: 40px;
@@ -69,11 +67,12 @@
 
 /* Textarea */
 textarea {
-    width: 650px;
-    height: 280px;
+    width: 100%; /* Full width of parent (.hero-content) */
+    max-width: 90vw; /* Limits max width */
+    height: clamp(200px, 40vh, 280px); /* Scales height responsively */
     background: rgba(27, 38, 59, 0.9);
     color: #e0e1dd;
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px); /* Responsive font size */
     border: 2px solid #778da9;
     outline: none;
     padding: 25px;
@@ -90,13 +89,14 @@ textarea:focus {
 }
 
 textarea::placeholder {
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px);
     color: #778da9;
 }
 
 /* Row Container */
 .row {
-    width: 650px;
+    width: 100%;
+    max-width: 90vw; /* Matches hero-content */
     display: flex;
     align-items: center;
     gap: 25px;
@@ -113,7 +113,7 @@ select {
     outline: none;
     border: 2px solid #778da9;
     border-radius: 50px;
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px);
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -127,12 +127,13 @@ select:hover, select:focus {
     display: flex;
     justify-content: center;
     gap: 20px;
-    width: 650px;
+    width: 100%;
+    max-width: 90vw;
 }
 
 /* Base button style */
 .action-button {
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px);
     padding: 12px 30px;
     border-radius: 50px;
     border: none;
@@ -181,7 +182,8 @@ select:hover, select:focus {
     align-items: center;
     gap: 15px;
     margin-bottom: 20px;
-    width: 650px;
+    width: 100%;
+    max-width: 90vw;
 }
 
 #fileInput {
@@ -190,7 +192,7 @@ select:hover, select:focus {
 
 #fileName {
     color: #e0e1dd;
-    font-size: 14px;
+    font-size: clamp(12px, 1.5vw, 14px);
     max-width: 200px;
     white-space: nowrap;
     overflow: hidden;
@@ -203,12 +205,14 @@ select:hover, select:focus {
     transition: color 0.2s ease;
 }
 
+/* Temporary Textarea */
 .textarea-temp {
-    width: 650px;
-    height: 280px;
+    width: 100%;
+    max-width: 90vw;
+    height: clamp(200px, 40vh, 280px);
     background: rgba(27, 38, 59, 0.9);
     color: #e0e1dd;
-    font-size: 16px;
+    font-size: clamp(14px, 2vw, 16px);
     border: 2px solid #778da9;
     padding: 25px;
     border-radius: 15px;
@@ -231,4 +235,32 @@ select:hover, select:focus {
 ::-webkit-scrollbar-thumb {
     background: #ff2e63;
     border-radius: 10px;
+}
+
+/* Media Queries for Extra Small Devices */
+@media (max-width: 600px) {
+    .hero h1 {
+        margin-top: -40px;
+        margin-bottom: 30px;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .action-button {
+        width: 100%;
+        padding: 12px 20px;
+    }
+
+    .file-upload {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }
