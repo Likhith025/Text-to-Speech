@@ -17,32 +17,38 @@ let currentWordIndex = 0;
 let words = [];
 let tempDiv = null;
 
-// Initialize voices with default fallback
+// Initialize voices with a fixed default
 function populateVoices() {
     voices = window.speechSynthesis.getVoices();
-    console.log('Voices loaded:', voices); // Debug log
-
     voiceSelect.innerHTML = ''; // Clear existing options
 
     if (voices.length > 0) {
-        // Populate available voices
-        voices.forEach((voice, i) => {
-            const option = new Option(`${voice.name} (${voice.lang})`, i);
-            voiceSelect.appendChild(option);
-        });
-    } else {
-        // Fallback: Add a default voice option with clear messaging
-        console.warn('No voices detected, falling back to system default');
-        const defaultOption = new Option('System Default Voice (Limited)', 'default');
-        voiceSelect.appendChild(defaultOption);
-        voices = [{ name: 'System Default Voice', lang: 'en-US' }]; // Mock voice for consistency
-        alert('No voices detected. Using your system’s default voice. For more options, check your browser/OS settings.');
-    }
+        // Prioritize an 'en-US' voice
+        let defaultVoiceIndex = voices.findIndex(voice => voice.lang === 'en-US');
+        if (defaultVoiceIndex === -1) {
+            defaultVoiceIndex = 0; // Fallback to first available voice
+            console.warn('No en-US voice found, using first available:', voices[0]);
+        } else {
+            console.log('Selected default voice:', voices[defaultVoiceIndex]);
+        }
 
-    voiceSelect.disabled = false; // Enable dropdown
+        // Populate dropdown
+        voices.forEach((voice, i) => {
+            voiceSelect.options[i] = new Option(`${voice.name} (${voice.lang})`, i);
+        });
+
+        // Set default voice
+        voiceSelect.value = defaultVoiceIndex;
+    } else {
+        // Silent fallback for no voices
+        console.warn('No voices detected, using system default');
+        voices = [{ name: 'System Default Voice', lang: 'en-US' }]; // Mock voice
+        voiceSelect.options[0] = new Option('System Default Voice (Limited)', 0);
+        voiceSelect.value = 0;
+    }
 }
 
-// File Handling Functions (unchanged)
+// File Handling Functions
 async function readFile(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -125,10 +131,7 @@ function highlightCurrentWord(index) {
 function speakFromPosition(position = 0) {
     const text = textarea.value.substring(position);
     currentUtterance = new SpeechSynthesisUtterance(text);
-    
-    // Use selected voice or system default
-    const selectedVoiceIndex = voiceSelect.value === 'default' ? 0 : parseInt(voiceSelect.value);
-    currentUtterance.voice = voices[selectedVoiceIndex] || null; // Null triggers system default
+    currentUtterance.voice = voices[voiceSelect.value] || voices[0]; // Use selected or first voice
     currentUtterance.rate = parseFloat(speedControl.value);
 
     let utteranceCharIndex = position;
@@ -260,10 +263,5 @@ clearBtn.addEventListener("click", () => {
 });
 
 // Initialize voices
-window.speechSynthesis.onvoiceschanged = () => {
-    console.log('onvoiceschanged triggered');
-    populateVoices();
-};
-
-// Initial call
+window.speechSynthesis.onvoiceschanged = populateVoices;
 populateVoices();
