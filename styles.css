@@ -6,10 +6,16 @@
     box-sizing: border-box;
 }
 
-/* Hero Section - Updated */
-.hero {
+html, body {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Hero Section */
+.hero {
+    width: 100vw; /* Full viewport width */
+    min-height: 100vh; /* Full viewport height */
     background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
     display: flex;
     align-items: center;
@@ -18,7 +24,7 @@
     color: #e0e1dd;
     position: relative;
     overflow: hidden;
-    padding: 20px;
+    padding: 5vw; /* Relative padding */
 }
 
 /* Fixed Background Layer */
@@ -35,12 +41,12 @@
     pointer-events: none;
 }
 
-/* Content Container - Updated for Responsiveness */
+/* Content Container */
 .hero-content {
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: 90vw; /* Changed from 650px to 90% of viewport width */
+    max-width: 90vw; /* Limit to 90% of viewport width */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,12 +54,12 @@
 
 /* Heading */
 .hero h1 {
-    font-size: clamp(30px, 5vw, 50px); /* Scales between 30px and 50px based on viewport */
+    font-size: clamp(24px, 4vw, 50px); /* Smaller minimum for mobile */
     font-weight: 600;
-    margin-top: -60px;
-    margin-bottom: 40px;
+    margin-top: -5vh; /* Relative margin */
+    margin-bottom: 4vh;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 0.2vw; /* Relative spacing */
     text-shadow: 0 0 15px rgba(255, 46, 99, 0.7);
     user-select: none;
 }
@@ -67,18 +73,18 @@
 
 /* Textarea */
 textarea {
-    width: 100%; /* Full width of parent (.hero-content) */
-    max-width: 90vw; /* Limits max width */
-    height: clamp(200px, 40vh, 280px); /* Scales height responsively */
+    width: 100%;
+    max-width: 90vw;
+    height: clamp(150px, 35vh, 280px); /* Adjusted height range */
     background: rgba(27, 38, 59, 0.9);
     color: #e0e1dd;
-    font-size: clamp(14px, 2vw, 16px); /* Responsive font size */
+    font-size: clamp(12px, 2vw, 16px);
     border: 2px solid #778da9;
     outline: none;
-    padding: 25px;
+    padding: 3vw;
     border-radius: 15px;
     resize: none;
-    margin-bottom: 40px;
+    margin-bottom: 4vh;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
 }
@@ -89,18 +95,18 @@ textarea:focus {
 }
 
 textarea::placeholder {
-    font-size: clamp(14px, 2vw, 16px);
+    font-size: clamp(12px, 2vw, 16px);
     color: #778da9;
 }
 
 /* Row Container */
 .row {
     width: 100%;
-    max-width: 90vw; /* Matches hero-content */
+    max-width: 90vw;
     display: flex;
     align-items: center;
-    gap: 25px;
-    margin-bottom: 20px;
+    gap: 2vw;
+    margin-bottom: 2vh;
 }
 
 /* Select Dropdown */
@@ -108,12 +114,12 @@ select {
     flex: 1;
     color: #e0e1dd;
     background: rgba(27, 38, 59, 0.9);
-    height: 55px;
-    padding: 0 25px;
+    height: clamp(40px, 6vh, 55px);
+    padding: 0 3vw;
     outline: none;
     border: 2px solid #778da9;
     border-radius: 50px;
-    font-size: clamp(14px, 2vw, 16px);
+    font-size: clamp(12px, 2vw, 16px);
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -126,15 +132,15 @@ select:hover, select:focus {
 .action-buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 2vw;
     width: 100%;
     max-width: 90vw;
 }
 
 /* Base button style */
 .action-button {
-    font-size: clamp(14px, 2vw, 16px);
-    padding: 12px 30px;
+    font-size: clamp(12px, 2vw, 16px);
+    padding: clamp(8px, 1.5vh, 12px) clamp(20px, 3vw, 30px);
     border-radius: 50px;
     border: none;
     outline: none;
@@ -180,8 +186,8 @@ select:hover, select:focus {
 .file-upload {
     display: flex;
     align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
+    gap: 1.5vw;
+    margin-bottom: 2vh;
     width: 100%;
     max-width: 90vw;
 }
@@ -192,8 +198,8 @@ select:hover, select:focus {
 
 #fileName {
     color: #e0e1dd;
-    font-size: clamp(12px, 1.5vw, 14px);
-    max-width: 200px;
+    font-size: clamp(10px, 1.5vw, 14px);
+    max-width: 40vw;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -209,14 +215,14 @@ select:hover, select:focus {
 .textarea-temp {
     width: 100%;
     max-width: 90vw;
-    height: clamp(200px, 40vh, 280px);
+    height: clamp(150px, 35vh, 280px);
     background: rgba(27, 38, 59, 0.9);
     color: #e0e1dd;
-    font-size: clamp(14px, 2vw, 16px);
+    font-size: clamp(12px, 2vw, 16px);
     border: 2px solid #778da9;
-    padding: 25px;
+    padding: 3vw;
     border-radius: 15px;
-    margin-bottom: 40px;
+    margin-bottom: 4vh;
     box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
     overflow-y: auto;
     white-space: pre-wrap;
@@ -237,26 +243,29 @@ select:hover, select:focus {
     border-radius: 10px;
 }
 
-/* Media Queries for Extra Small Devices */
+/* Media Queries */
 @media (max-width: 600px) {
+    .hero {
+        padding: 3vw;
+    }
+
     .hero h1 {
-        margin-top: -40px;
-        margin-bottom: 30px;
+        margin-top: -3vh;
+        margin-bottom: 3vh;
     }
 
     .row {
         flex-direction: column;
-        gap: 15px;
+        gap: 1.5vw;
     }
 
     .action-buttons {
         flex-direction: column;
-        gap: 15px;
+        gap: 1.5vw;
     }
 
     .action-button {
         width: 100%;
-        padding: 12px 20px;
     }
 
     .file-upload {
